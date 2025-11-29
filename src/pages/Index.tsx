@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Wifi, WifiOff, Wand2, Check } from "lucide-react";
+import { HowItWorks } from "@/components/HowItWorks";
 
 const Index = () => {
   const features = [
@@ -241,6 +242,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* How It Works Section */}
+      <HowItWorks />
 
       {/* Pricing Section */}
       <section className="py-20 px-6 bg-card/30 backdrop-blur-sm">
