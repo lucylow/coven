@@ -8,67 +8,39 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 28 25% 97%;
-    --foreground: 20 14% 12%;
+    --background: 225 25% 11%;
+    --foreground: 0 0% 94%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 20 14% 12%;
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 94%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 20 14% 12%;
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 94%;
 
-    --primary: 20 14% 12%;
-    --primary-foreground: 28 25% 97%;
+    --primary: 275 65% 18%;
+    --primary-foreground: 0 0% 94%;
 
-    --secondary: 25 20% 88%;
-    --secondary-foreground: 20 14% 12%;
+    --secondary: 28 46% 32%;
+    --secondary-foreground: 0 0% 94%;
 
-    --muted: 25 20% 92%;
-    --muted-foreground: 20 8% 45%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 63%;
 
-    --accent: 12 76% 61%;
-    --accent-foreground: 28 25% 97%;
+    --accent: 14 100% 60%;
+    --accent-foreground: 0 0% 94%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 28 25% 97%;
+    --destructive-foreground: 0 0% 94%;
 
-    --border: 25 15% 85%;
-    --input: 25 15% 85%;
-    --ring: 12 76% 61%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 14 100% 60%;
 
     --radius: 0.75rem;
 
+    --gradient-hero: linear-gradient(135deg, hsl(275, 65%, 18%), hsl(0, 0%, 0%));
+    --shadow-glow: 0 0 40px hsl(14 100% 60% / 0.3);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .dark {
-    --background: 20 14% 12%;
-    --foreground: 28 25% 97%;
-
-    --card: 20 12% 16%;
-    --card-foreground: 28 25% 97%;
-
-    --popover: 20 12% 16%;
-    --popover-foreground: 28 25% 97%;
-
-    --primary: 28 25% 97%;
-    --primary-foreground: 20 14% 12%;
-
-    --secondary: 20 10% 22%;
-    --secondary-foreground: 28 25% 97%;
-
-    --muted: 20 10% 22%;
-    --muted-foreground: 25 10% 60%;
-
-    --accent: 12 76% 61%;
-    --accent-foreground: 28 25% 97%;
-
-    --destructive: 0 62% 45%;
-    --destructive-foreground: 28 25% 97%;
-
-    --border: 20 10% 22%;
-    --input: 20 10% 22%;
-    --ring: 12 76% 61%;
   }
 }
 
@@ -85,8 +57,16 @@ All colors MUST be HSL.
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Crimson Text', serif;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-family: 'Creepster', 'Crimson Text', serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .magic-glow {
+    text-shadow: 0 0 20px hsl(var(--accent) / 0.5);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
   }
 }
