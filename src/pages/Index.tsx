@@ -1,52 +1,330 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Sparkles, Wifi, WifiOff, Wand2, Check } from "lucide-react";
 
 const Index = () => {
-  return (
-    <main className="min-h-screen flex items-center justify-center px-6 py-12">
-      <div className="max-w-4xl w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center space-y-8"
-        >
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-6xl md:text-7xl lg:text-8xl tracking-tight"
-          >
-            Blank Canvas
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-light"
-          >
-            A beautifully crafted starting point for your next project.
-            Clean, minimal, and ready for your ideas.
-          </motion.p>
+  const features = [
+    {
+      icon: WifiOff,
+      title: "Work Anywhere, Anytime",
+      description: "Start a drawing session on the train, continue in a cafe, and sync when you're back online. Your team sees all your changes automatically.",
+    },
+    {
+      icon: Sparkles,
+      title: "Conflict-Free Collaboration",
+      description: "Our enchanted CRDT engine automatically resolves conflicts. No more lost work or 'who changed what' confusion.",
+    },
+    {
+      icon: Wand2,
+      title: "Tools That Spark Joy",
+      description: "Halloween-themed brushes, magical effects, and collaborative cursors that make every session feel like a creative séance.",
+    },
+  ];
 
+  const pricingTiers = [
+    {
+      name: "Apprentice",
+      price: "Free Forever",
+      features: [
+        "3 simultaneous collaborators",
+        "10 canvases",
+        "Basic Halloween tools",
+        "7-day version history",
+        "Community support",
+      ],
+      cta: "Start Drawing",
+      popular: false,
+    },
+    {
+      name: "Sorcerer",
+      price: "$8/month",
+      features: [
+        "Unlimited collaborators",
+        "Unlimited canvases",
+        "Advanced magical tools",
+        "30-day version history",
+        "Priority support",
+        "Custom themes",
+      ],
+      cta: "Become a Sorcerer",
+      popular: true,
+    },
+    {
+      name: "Archmage",
+      price: "Custom",
+      features: [
+        "Self-hosted deployment",
+        "SSO & advanced security",
+        "Unlimited version history",
+        "Dedicated support",
+        "Custom MCP integrations",
+      ],
+      cta: "Contact Sales",
+      popular: false,
+    },
+  ];
+
+  return (
+    <main className="min-h-screen bg-gradient-hero">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-accent rounded-full opacity-30"
+              initial={{ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight }}
+              animate={{
+                y: [null, Math.random() * window.innerHeight],
+                x: [null, Math.random() * window.innerWidth],
+              }}
+              transition={{
+                duration: Math.random() * 10 + 10,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-6xl w-full relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center space-y-8"
+          >
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-5xl md:text-7xl lg:text-8xl magic-glow"
+            >
+              Collaborative Drawing That Never Drops the Magic
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-light"
+            >
+              Create together in real-time, even when the internet disappears. Coven works flawlessly offline and syncs automatically when you're back online.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6"
+            >
+              <Button size="lg" className="group bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_0_30px_rgba(255,107,53,0.3)] hover:shadow-[0_0_50px_rgba(255,107,53,0.5)] transform hover:-translate-y-1 transition-all">
+                Start Drawing Free - No Signup Required
+                <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+              </Button>
+              <Button size="lg" variant="outline" className="border-accent/50 hover:bg-accent/10">
+                Watch the Magic
+              </Button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="flex flex-wrap justify-center gap-6 pt-8 text-sm"
+            >
+              {[
+                "Real-time collaboration that survives internet outages",
+                "No more 'waiting for connection' frustrations",
+                "Your data stays private and secure - always",
+              ].map((benefit, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-accent" />
+                  <span className="text-foreground/80">{benefit}</span>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Problem/Solution Section */}
+      <section className="py-20 px-6 bg-card/30 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center space-y-6 mb-16"
           >
-            <Button variant="hero" size="lg" className="group">
-              Get Started
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button variant="outline" size="lg">
-              Learn More
-            </Button>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl magic-glow">
+              Tired of Collaboration Tools That Fail When You Need Them Most?
+            </h2>
           </motion.div>
-        </motion.div>
-      </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-4"
+            >
+              <Card className="p-6 bg-destructive/10 border-destructive/30">
+                <div className="flex items-start gap-3">
+                  <WifiOff className="w-6 h-6 text-destructive mt-1" />
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">The Frustration</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>• Internet down? So is your team's productivity</li>
+                      <li>• Conflicts and lost work when multiple people edit simultaneously</li>
+                      <li>• Worried about privacy with cloud-only solutions</li>
+                      <li>• Clunky interfaces that kill creative flow</li>
+                    </ul>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-4"
+            >
+              <Card className="p-6 bg-accent/10 border-accent/30">
+                <div className="flex items-start gap-3">
+                  <Wifi className="w-6 h-6 text-accent mt-1" />
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">The Magic</h3>
+                    <p className="text-muted-foreground">
+                      Coven uses magical CRDT technology to keep your team in sync, even when the internet isn't. Draw, design, and brainstorm together - online, offline, or somewhere in between.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl text-center mb-16 magic-glow"
+          >
+            Core Features
+          </motion.h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+              >
+                <Card className="p-8 h-full bg-card/50 backdrop-blur border-border/50 hover:border-accent/50 transition-all hover:shadow-[0_0_30px_rgba(255,107,53,0.2)]">
+                  <feature.icon className="w-12 h-12 text-accent mb-4" />
+                  <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-20 px-6 bg-card/30 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl text-center mb-16 magic-glow"
+          >
+            Pricing
+          </motion.h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {pricingTiers.map((tier, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="relative"
+              >
+                {tier.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-semibold">
+                    Most Magical
+                  </div>
+                )}
+                <Card className={`p-8 h-full ${tier.popular ? 'border-accent bg-accent/5' : 'bg-card/50'} backdrop-blur`}>
+                  <h3 className="text-3xl font-semibold mb-2">{tier.name}</h3>
+                  <p className="text-4xl font-bold mb-6 text-accent">{tier.price}</p>
+                  <ul className="space-y-3 mb-8">
+                    {tier.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <Check className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                        <span className="text-muted-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    className={`w-full ${tier.popular ? 'bg-accent hover:bg-accent/90' : ''}`}
+                    variant={tier.popular ? 'default' : 'outline'}
+                  >
+                    {tier.cta}
+                  </Button>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-32 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/20" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <h2 className="text-5xl md:text-6xl lg:text-7xl magic-glow">
+              Ready to Experience Truly Magical Collaboration?
+            </h2>
+            <p className="text-xl md:text-2xl text-muted-foreground">
+              Join thousands of teams who never worry about internet connections again.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_0_40px_rgba(255,107,53,0.4)] hover:shadow-[0_0_60px_rgba(255,107,53,0.6)] transform hover:-translate-y-1 transition-all text-lg px-10">
+                Create Your First Canvas - Free
+              </Button>
+              <Button size="lg" variant="outline" className="border-accent/50 hover:bg-accent/10 text-lg">
+                Schedule a Demo
+              </Button>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6 pt-4 text-sm text-muted-foreground">
+              <span>✓ No credit card required</span>
+              <span>✓ Set up in 30 seconds</span>
+              <span>✓ Privacy-first: We never sell your data</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </main>
   );
 };
