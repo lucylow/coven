@@ -5,6 +5,15 @@ import { Sparkles, Wifi, WifiOff, Wand2, Check } from "lucide-react";
 import { HowItWorks } from "@/components/HowItWorks";
 
 const Index = () => {
+  const floatingElements = [
+    { emoji: '🖋️', left: '10%', top: '20%', delay: 0 },
+    { emoji: '🧪', left: '85%', top: '30%', delay: 0.5 },
+    { emoji: '👻', left: '15%', top: '70%', delay: 1 },
+    { emoji: '🔮', left: '80%', top: '60%', delay: 1.5 },
+    { emoji: '🕷️', left: '5%', top: '50%', delay: 2 },
+    { emoji: '🎃', left: '90%', top: '15%', delay: 2.5 }
+  ];
+
   const features = [
     {
       icon: WifiOff,
@@ -67,24 +76,51 @@ const Index = () => {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-hero">
+    <main className="min-h-screen bg-gradient-hero relative overflow-hidden">{floatingElements.map((element, index) => (
+        <motion.div
+          key={index}
+          className="absolute text-4xl pointer-events-none z-10 opacity-30"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ 
+            opacity: [0.2, 0.4, 0.2],
+            scale: 1,
+            y: [0, -20, 0],
+            rotate: [0, 5, -5, 0]
+          }}
+          transition={{ 
+            opacity: { duration: 3, repeat: Infinity, delay: element.delay },
+            y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: element.delay },
+            rotate: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: element.delay }
+          }}
+          style={{ left: element.left, top: element.top }}
+        >
+          {element.emoji}
+        </motion.div>
+      ))}
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden">
-        {/* Animated background elements */}
+        {/* Animated background particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(30)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-accent rounded-full opacity-30"
-              initial={{ x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight }}
+              className="absolute rounded-full"
+              style={{
+                width: Math.random() * 4 + 2,
+                height: Math.random() * 4 + 2,
+                background: `rgba(255, 107, 53, ${Math.random() * 0.3 + 0.1})`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
               animate={{
-                y: [null, Math.random() * window.innerHeight],
-                x: [null, Math.random() * window.innerWidth],
+                y: [0, -100, -200],
+                opacity: [0, 1, 0],
               }}
               transition={{
-                duration: Math.random() * 10 + 10,
+                duration: Math.random() * 3 + 2,
                 repeat: Infinity,
-                repeatType: "reverse",
+                delay: Math.random() * 2,
+                ease: "easeOut",
               }}
             />
           ))}
@@ -101,9 +137,22 @@ const Index = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl magic-glow"
+              className="text-5xl md:text-7xl lg:text-8xl magic-glow relative"
             >
-              Collaborative Drawing That Never Drops the Magic
+              <motion.span 
+                className="inline-block"
+                animate={{ 
+                  textShadow: [
+                    "0 0 20px rgba(255,107,53,0.3)",
+                    "0 0 40px rgba(255,107,53,0.6)",
+                    "0 0 20px rgba(255,107,53,0.3)"
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                Collaborative Drawing
+              </motion.span>{" "}
+              <span className="block mt-2">That Never Drops the Magic</span>
             </motion.h1>
 
             <motion.p
@@ -121,13 +170,31 @@ const Index = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6"
             >
-              <Button size="lg" className="group bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_0_30px_rgba(255,107,53,0.3)] hover:shadow-[0_0_50px_rgba(255,107,53,0.5)] transform hover:-translate-y-1 transition-all">
-                Start Drawing Free - No Signup Required
-                <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-accent/50 hover:bg-accent/10">
-                Watch the Magic
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button size="lg" className="group relative overflow-hidden bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_0_30px_rgba(255,107,53,0.3)] hover:shadow-[0_0_50px_rgba(255,107,53,0.5)] transform hover:-translate-y-1 transition-all">
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.6 }}
+                  />
+                  <span className="relative flex items-center gap-2">
+                    Start Drawing Free - No Signup Required
+                    <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+                  </span>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button size="lg" variant="outline" className="border-accent/50 hover:bg-accent/10 hover:border-accent transition-all">
+                  Watch the Magic
+                </Button>
+              </motion.div>
             </motion.div>
 
             <motion.div
@@ -161,9 +228,19 @@ const Index = () => {
             transition={{ duration: 0.6 }}
             className="text-center space-y-6 mb-16"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl magic-glow">
+            <motion.h2 
+              className="text-4xl md:text-5xl lg:text-6xl magic-glow"
+              animate={{ 
+                textShadow: [
+                  "0 0 15px rgba(255,107,53,0.2)",
+                  "0 0 30px rgba(255,107,53,0.4)",
+                  "0 0 15px rgba(255,107,53,0.2)"
+                ]
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
               Tired of Collaboration Tools That Fail When You Need Them Most?
-            </h2>
+            </motion.h2>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -219,6 +296,14 @@ const Index = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl md:text-5xl text-center mb-16 magic-glow"
+            animate={{ 
+              textShadow: [
+                "0 0 15px rgba(255,107,53,0.2)",
+                "0 0 30px rgba(255,107,53,0.4)",
+                "0 0 15px rgba(255,107,53,0.2)"
+              ]
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
           >
             Core Features
           </motion.h2>
@@ -232,9 +317,14 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
               >
-                <Card className="p-8 h-full bg-card/50 backdrop-blur border-border/50 hover:border-accent/50 transition-all hover:shadow-[0_0_30px_rgba(255,107,53,0.2)]">
-                  <feature.icon className="w-12 h-12 text-accent mb-4" />
-                  <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
+                <Card className="p-8 h-full bg-card/50 backdrop-blur border-border/50 hover:border-accent/50 transition-all hover:shadow-[0_0_30px_rgba(255,107,53,0.2)] hover:-translate-y-2 group">
+                  <motion.div
+                    whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <feature.icon className="w-12 h-12 text-accent mb-4" />
+                  </motion.div>
+                  <h3 className="text-2xl font-semibold mb-3 group-hover:text-accent transition-colors">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
                 </Card>
               </motion.div>
@@ -254,6 +344,14 @@ const Index = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl md:text-5xl text-center mb-16 magic-glow"
+            animate={{ 
+              textShadow: [
+                "0 0 15px rgba(255,107,53,0.2)",
+                "0 0 30px rgba(255,107,53,0.4)",
+                "0 0 15px rgba(255,107,53,0.2)"
+              ]
+            }}
+            transition={{ duration: 3, repeat: Infinity }}
           >
             Pricing
           </motion.h2>
@@ -307,19 +405,45 @@ const Index = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl magic-glow">
+            <motion.h2 
+              className="text-5xl md:text-6xl lg:text-7xl magic-glow"
+              animate={{ 
+                textShadow: [
+                  "0 0 20px rgba(255,107,53,0.3)",
+                  "0 0 40px rgba(255,107,53,0.6)",
+                  "0 0 20px rgba(255,107,53,0.3)"
+                ]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
               Ready to Experience Truly Magical Collaboration?
-            </h2>
+            </motion.h2>
             <p className="text-xl md:text-2xl text-muted-foreground">
               Join thousands of teams who never worry about internet connections again.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
-              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_0_40px_rgba(255,107,53,0.4)] hover:shadow-[0_0_60px_rgba(255,107,53,0.6)] transform hover:-translate-y-1 transition-all text-lg px-10">
-                Create Your First Canvas - Free
-              </Button>
-              <Button size="lg" variant="outline" className="border-accent/50 hover:bg-accent/10 text-lg">
-                Schedule a Demo
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button size="lg" className="relative overflow-hidden bg-accent hover:bg-accent/90 text-accent-foreground shadow-[0_0_40px_rgba(255,107,53,0.4)] hover:shadow-[0_0_60px_rgba(255,107,53,0.6)] transform hover:-translate-y-1 transition-all text-lg px-10">
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.6 }}
+                  />
+                  <span className="relative">Create Your First Canvas - Free</span>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button size="lg" variant="outline" className="border-accent/50 hover:bg-accent/10 hover:border-accent transition-all text-lg">
+                  Schedule a Demo
+                </Button>
+              </motion.div>
             </div>
             <div className="flex flex-wrap justify-center gap-6 pt-4 text-sm text-muted-foreground">
               <span>✓ No credit card required</span>
